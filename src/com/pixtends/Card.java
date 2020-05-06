@@ -1,28 +1,17 @@
 package com.pixtends;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Card {
     private String question;
     private String answer;
-    enum Color {
-        BLUE,
-        PINK,
-        YELLOW,
-        MAROON,
-        GREEN,
-        ORANGE
-    }
-    enum Type {
-        GEOGRAPHY,
-        ENTERTAINMENT,
-        HISTORY,
-        ARTS_LITERATURE,
-        SCIENCES_NATURE,
-        SPORTS_HOBBIES
-    }
+    private CardType type;
 
-    public Card(String question, String answer) {
+    public Card(String question, String answer, CardType type) {
         this.question = question;
         this.answer = answer;
+        this.type = type;
     }
 
     public String getQuestion() {
@@ -33,27 +22,12 @@ public class Card {
         return answer;
     }
 
-    public String typeToColor(Type type) {
-        switch (type) {
-            case GEOGRAPHY:
-                return "blue";
-            case ENTERTAINMENT:
-                return "pink";
-            case HISTORY:
-                return "yellow";
-            case ARTS_LITERATURE:
-                return "maroon";
-            case SCIENCES_NATURE:
-                return "green";
-            case SPORTS_HOBBIES:
-                return "orange";
-            default:
-                return "blank";
-        }
-    }
-
-    public static String[] getTypesArray() {
-        return new String[]{"Geography", "Entertainment", "History", "Arts & Literature", "Sciences & Nature", "Sports & Hobbies"};
+    public String formatStringForFile(FormatterInterface formatter) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(question);
+        list.add(answer);
+        list.add(type.getDomain());
+        return formatter.format(list);
     }
 }
 
