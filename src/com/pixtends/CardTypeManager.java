@@ -25,4 +25,15 @@ public class CardTypeManager {
 
         return null;
     }
+
+    public static int findIndexFromDomain (String domain) {
+        ArrayList<CardType> list = getAll();
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).getDomain().equals(domain)) {
+                return i;
+            }
+        }
+
+        return 0;
+    }
 }
